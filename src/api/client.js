@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000' || 'https://gb-shope-stock-management-backend.onrender.com';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://gb-shope-stock-management-backend.onrender.com';
 
 export async function apiFetch(endpoint, options = {}) {
   const token = localStorage.getItem('token');
