@@ -42,12 +42,14 @@ export default function BottomNav() {
     { to: '/purchases/new', icon: ClipboardList, label: 'New Purchase Request' },
     { to: '/purchases/mine', icon: ClipboardList, label: 'My Purchases' },
     { to: '/expenses/new', icon: Receipt, label: 'Record Expense' },
+    { to: '/expenses', icon: Receipt, label: 'View Expenses' },
   ];
 
   const adminMoreItems = [
     { to: '/purchases/review', icon: ClipboardList, label: 'Purchase Requests' },
     { to: '/purchases/new', icon: ClipboardList, label: 'New Purchase' },
     { to: '/expenses/new', icon: Receipt, label: 'Record Expense' },
+    { to: '/expenses', icon: Receipt, label: 'View Expenses' },
     { to: '/daily-report', icon: FileText, label: 'Daily Report' },
     { to: '/daily-reports/admin', icon: FileText, label: 'All Daily Reports' },
     { to: '/reports/financial', icon: BarChart3, label: 'Financial Reports' },

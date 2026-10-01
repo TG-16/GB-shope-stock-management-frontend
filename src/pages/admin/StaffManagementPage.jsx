@@ -113,9 +113,9 @@ export default function StaffManagementPage() {
                     {isActive ? (
                       <button 
                         className="btn btn-sm btn-danger"
-                        onClick={() => setConfirmAction({ id: staff.id, newStatus: 'INACTIVE', name: staff.full_name })}
+                        onClick={() => setConfirmAction({ id: staff.id, newStatus: 'REVOKED', name: staff.full_name })}
                       >
-                        <X size={16} /> Disable
+                        <X size={16} /> Revoke
                       </button>
                     ) : (
                       <button 
@@ -168,13 +168,13 @@ export default function StaffManagementPage() {
         isOpen={!!confirmAction}
         onClose={() => setConfirmAction(null)}
         onConfirm={handleStatusChange}
-        title={confirmAction?.newStatus === 'INACTIVE' ? 'Disable Account' : 'Enable Account'}
-        message={confirmAction?.newStatus === 'INACTIVE' 
-          ? `Are you sure you want to disable ${confirmAction?.name}? They will no longer be able to log in.`
+        title={confirmAction?.newStatus === 'REVOKED' ? 'Revoke Account' : 'Enable Account'}
+        message={confirmAction?.newStatus === 'REVOKED' 
+          ? `Are you sure you want to revoke access for ${confirmAction?.name}? They will no longer be able to log in.`
           : `Are you sure you want to enable ${confirmAction?.name}? They will regain access to the system.`
         }
-        confirmText={confirmAction?.newStatus === 'INACTIVE' ? 'Disable' : 'Enable'}
-        danger={confirmAction?.newStatus === 'INACTIVE'}
+        confirmText={confirmAction?.newStatus === 'REVOKED' ? 'Revoke' : 'Enable'}
+        danger={confirmAction?.newStatus === 'REVOKED'}
         loading={statusLoading}
       />
     </div>

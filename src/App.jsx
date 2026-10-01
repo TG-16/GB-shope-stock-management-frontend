@@ -13,6 +13,7 @@ import StockListPage from './pages/staff/StockListPage';
 import NewPurchasePage from './pages/staff/NewPurchasePage';
 import MyPurchasesPage from './pages/staff/MyPurchasesPage';
 import NewExpensePage from './pages/staff/NewExpensePage';
+import ExpensesPage from './pages/shared/ExpensesPage';
 import DailyReportPage from './pages/staff/DailyReportPage';
 import DashboardPage from './pages/admin/DashboardPage';
 import AllSalesPage from './pages/admin/AllSalesPage';
@@ -50,6 +51,7 @@ function AppRoutes() {
           <Route path="/purchases/new" element={<NewPurchasePage />} />
           <Route path="/purchases/mine" element={<MyPurchasesPage />} />
           <Route path="/expenses/new" element={<NewExpensePage />} />
+          <Route path="/expenses" element={<ExpensesPage />} />
           <Route path="/daily-report" element={<DailyReportPage />} />
         </Route>
       </Route>

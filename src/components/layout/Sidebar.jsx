@@ -92,6 +92,9 @@ export default function Sidebar() {
           <NavLink to="/expenses/new" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
             <Receipt size={18} /> Record Expense
           </NavLink>
+          <NavLink to="/expenses" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+            <Receipt size={18} /> View Expenses
+          </NavLink>
           <NavLink to="/daily-report" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
             <FileText size={18} /> Daily Report
           </NavLink>

@@ -61,6 +61,7 @@ export default function DashboardPage() {
       action: () => navigate('/purchases/review'),
       icon: ClipboardList,
       color: 'var(--color-warning)',
+      count: stats.pendingPurchases
     });
   }
   if (stats?.pendingCreditPayments > 0) {
@@ -69,6 +70,7 @@ export default function DashboardPage() {
       action: () => navigate('/sales/all'),
       icon: CreditCard,
       color: 'var(--color-info)',
+      count: stats.pendingCreditPayments
     });
   }
 
@@ -80,9 +82,9 @@ export default function DashboardPage() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="scroll-x gap-4 mb-6">
         {cards.map((card, i) => (
-          <div key={i} className="stat-card">
+          <div key={i} className="stat-card" style={{ minWidth: '160px', flex: '0 0 auto' }}>
             <div className="stat-card-icon" style={{ background: card.bg, color: card.color }}>
               <card.icon size={22} />
             </div>
@@ -113,7 +115,7 @@ export default function DashboardPage() {
                   <div className="font-medium">{alert.label}</div>
                   <div className="text-xs text-muted">Tap to review</div>
                 </div>
-                <span className="badge-count">{i === 0 ? stats?.pendingPurchases : stats?.pendingCreditPayments}</span>
+                <span className="badge-count">{alert.count}</span>
               </button>
             ))}
           </div>

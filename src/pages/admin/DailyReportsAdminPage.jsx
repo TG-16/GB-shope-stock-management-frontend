@@ -42,37 +42,37 @@ export default function DailyReportsAdminPage() {
       ) : (
         <div className="flex flex-col gap-3">
           {reports.map(report => {
-            const isExpanded = expandedId === report.id;
+            const isExpanded = expandedId === report.reportId;
             return (
-              <div key={report.id} className="card">
+              <div key={report.reportId} className="card">
                 <div 
                   className="flex justify-between items-center" 
                   style={{ cursor: 'pointer' }}
-                  onClick={() => setExpandedId(isExpanded ? null : report.id)}
+                  onClick={() => setExpandedId(isExpanded ? null : report.reportId)}
                 >
                   <div>
-                    <div className="font-semi mb-1">Report #{report.id}</div>
-                    <div className="text-sm text-muted">by {report.staff_name} · {formatDateTime(report.created_at)}</div>
+                    <div className="font-semi mb-1">Report #{report.reportId}</div>
+                    <div className="text-sm text-muted">by {report.staff?.fullName} · {formatDateTime(report.createdAt)}</div>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="text-right">
-                      <div className="font-semi">{formatCurrency(report.total_sales_amount)}</div>
-                      <div className="text-xs text-success">{formatCurrency(report.total_profit)} profit</div>
+                      <div className="font-semi">{formatCurrency(report.dailySellsAmount)}</div>
+                      <div className="text-xs text-success">{formatCurrency(report.dailyTotalProfit)} profit</div>
                     </div>
                     {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                   </div>
                 </div>
 
-                {isExpanded && report.bankDeposits && (
+                {isExpanded && report.bankEntries && (
                   <div className="mt-4 pt-4" style={{ borderTop: '1px solid var(--color-border-light)' }}>
                     <h4 className="text-sm font-medium mb-2 text-muted">Bank Deposits</h4>
                     <div className="flex flex-col gap-2">
-                      {report.bankDeposits.length === 0 ? (
+                      {report.bankEntries.length === 0 ? (
                         <div className="text-sm text-muted">No deposits recorded</div>
                       ) : (
-                        report.bankDeposits.map(dep => (
-                          <div key={dep.bank_id} className="flex justify-between text-sm p-2 bg-[var(--color-surface-alt)] rounded-md">
-                            <span>{dep.bank_name}</span>
+                        report.bankEntries.map(dep => (
+                          <div key={dep.bankId} className="flex justify-between text-sm p-2 bg-[var(--color-surface-alt)] rounded-md">
+                            <span>{dep.bankName}</span>
                             <span className="font-medium">{formatCurrency(dep.amount)}</span>
                           </div>
                         ))

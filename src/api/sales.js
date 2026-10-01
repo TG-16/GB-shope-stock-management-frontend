@@ -14,6 +14,7 @@ export const salesApi = {
   },
 
   requestCreditPayment: (saleId) => apiPost('/api/sales/credit-requests', { saleId }),
-  getCreditPaymentRequests: () => apiGet('/api/sales/credit-payment-requests'),
-  approveCreditPayment: (requestId) => apiPut(`/api/sales/credit-payment-requests/${requestId}/approve`),
+  getCreditPaymentRequests: () => apiGet('/api/sales/credit-requests'),
+  approveCreditPayment: (requestId) => apiPut(`/api/sales/credit-requests/${requestId}/approve`),
+  rejectCreditPayment: (requestId) => apiPut(`/api/sales/credit-requests/${requestId}/reject`),
 };

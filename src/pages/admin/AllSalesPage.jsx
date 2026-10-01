@@ -27,14 +27,7 @@ export default function AllSalesPage() {
     }
   };
 
-  const loadCreditRequests = async () => {
-    try {
-      const data = await salesApi.getCreditPaymentRequests();
-      setCreditRequests(data);
-    } catch { /* silent */ }
-  };
-
-  useEffect(() => { loadSales(); loadCreditRequests(); }, [filter]);
+  useEffect(() => { loadSales(); }, [filter]);
 
   const setDatePreset = (preset) => {
     const today = getToday();
@@ -47,7 +40,16 @@ export default function AllSalesPage() {
     try {
       await salesApi.approveCreditPayment(requestId);
       toast.success('Credit payment approved!');
-      loadCreditRequests();
+      loadSales();
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  const handleRejectCreditPayment = async (requestId) => {
+    try {
+      await salesApi.rejectCreditPayment(requestId);
+      toast.success('Credit payment rejected!');
       loadSales();
     } catch (err) {
       toast.error(err.message);
@@ -63,31 +65,6 @@ export default function AllSalesPage() {
         <p className="page-subtitle">View and manage all sales records</p>
       </div>
 
-      {/* Pending Credit Requests */}
-      {creditRequests.length > 0 && (
-        <div className="section">
-          <h3 className="section-title">Pending Credit Payments ({creditRequests.length})</h3>
-          <div className="flex flex-col gap-3 mb-5">
-            {creditRequests.map(req => (
-              <div key={req.request_id} className="card" style={{ borderLeft: '4px solid var(--color-info)' }}>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="font-semi">Sale #{req.sale_id}</div>
-                    <div className="text-sm text-muted">by {req.staff_name} · {formatDateTime(req.created_at)}</div>
-                  </div>
-                  <button
-                    className="btn btn-sm btn-success"
-                    onClick={() => handleApproveCreditPayment(req.request_id)}
-                  >
-                    Approve
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Filters */}
       <div className="filter-bar">
         <div className="flex gap-2">
@@ -98,7 +75,8 @@ export default function AllSalesPage() {
         <input type="date" className="form-input" value={filter.from} onChange={e => setFilter(f => ({ ...f, from: e.target.value }))} />
         <input type="date" className="form-input" value={filter.to} onChange={e => setFilter(f => ({ ...f, to: e.target.value }))} />
         <select className="form-select" value={filter.status} onChange={e => setFilter(f => ({ ...f, status: e.target.value }))}>
-          <option value="">Active Sales</option>
+          <option value="">All Sales</option>
+          <option value="ACTIVE">Active Sales</option>
           <option value="CREDIT">Credit</option>
           <option value="CREDIT_PAID">Credit Paid</option>
           <option value="CORRECTED">Corrected</option>
@@ -137,6 +115,11 @@ export default function AllSalesPage() {
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-semi">Sale #{sale.saleId}</span>
                       <span className={`badge ${getStatusBadgeClass(sale.status)}`}>{formatStatus(sale.status)}</span>
+                      {sale.pendingRequestId && (
+                        <span className="badge" style={{ background: 'var(--color-info-light)', color: 'var(--color-info)' }}>
+                          Request Pending
+                        </span>
+                      )}
                     </div>
                     <div className="text-sm text-muted">
                       {sale.staff?.fullName} · {formatDateTime(sale.createdAt)}
@@ -156,6 +139,25 @@ export default function AllSalesPage() {
                         <span>{formatCurrency(item.quantity * item.sellingPrice)}</span>
                       </div>
                     ))}
+                    {sale.pendingRequestId && (
+                      <div className="flex gap-2 mt-4 pt-4" style={{ borderTop: '1px solid var(--color-border-light)' }}>
+                        <div className="flex-1 font-medium text-sm text-info flex items-center">
+                          Payment Approval Requested
+                        </div>
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={(e) => { e.stopPropagation(); handleRejectCreditPayment(sale.pendingRequestId); }}
+                        >
+                          Reject
+                        </button>
+                        <button
+                          className="btn btn-sm btn-success"
+                          onClick={(e) => { e.stopPropagation(); handleApproveCreditPayment(sale.pendingRequestId); }}
+                        >
+                          Approve
+                        </button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

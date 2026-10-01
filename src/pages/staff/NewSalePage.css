@@ -71,9 +71,15 @@
 
 .cart-item-fields {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: var(--space-3);
   margin-bottom: var(--space-3);
+}
+
+@media (min-width: 480px) {
+  .cart-item-fields {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .qty-control {

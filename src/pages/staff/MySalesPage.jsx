@@ -62,7 +62,8 @@ export default function MySalesPage() {
         <input type="date" className="form-input" value={filter.from} onChange={e => setFilter(f => ({ ...f, from: e.target.value }))} />
         <input type="date" className="form-input" value={filter.to} onChange={e => setFilter(f => ({ ...f, to: e.target.value }))} />
         <select className="form-select" value={filter.status} onChange={e => setFilter(f => ({ ...f, status: e.target.value }))}>
-          <option value="">Active Sales</option>
+          <option value="">All Sales</option>
+          <option value="ACTIVE">Active Sales</option>
           <option value="CREDIT">Credit Sales</option>
           <option value="CREDIT_PAID">Credit Paid</option>
           <option value="CORRECTED">Corrected</option>
@@ -118,8 +119,9 @@ export default function MySalesPage() {
                       <button
                         className="btn btn-sm btn-primary mt-3 btn-block"
                         onClick={(e) => { e.stopPropagation(); handleRequestCreditPayment(sale.saleId); }}
+                        disabled={!!sale.pendingRequestId}
                       >
-                        Request Credit Payment
+                        {sale.pendingRequestId ? 'Payment Requested' : 'Request Credit Payment'}
                       </button>
                     )}
                   </div>
