@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { RotateCcw, CheckCircle, XCircle, AlertCircle, ShoppingCart } from 'lucide-react';
 import { voidsApi } from '../../api/voids';
 import { useToast } from '../../components/ui/Toast';
@@ -57,6 +58,21 @@ export default function VoidRequestsPage() {
       <div className="page-header">
         <h1 className="page-title">Sale Void Requests</h1>
         <p className="page-subtitle">Review and authorize staff requests for sale corrections and returns</p>
+      </div>
+
+      {/* Sub-nav switcher between All Sales and Void Requests */}
+      <div className="subnav-tabs mb-4">
+        <Link to="/sales/all" className="subnav-tab">
+          <ShoppingCart size={16} />
+          <span>All Sales</span>
+        </Link>
+        <Link to="/sales/void-requests" className="subnav-tab active">
+          <RotateCcw size={16} />
+          <span>Void Requests</span>
+          {requests.length > 0 && (
+            <span className="badge-count badge-danger">{requests.length}</span>
+          )}
+        </Link>
       </div>
 
       {loading ? (

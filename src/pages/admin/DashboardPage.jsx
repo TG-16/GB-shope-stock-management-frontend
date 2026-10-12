@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package, ShoppingCart, TrendingUp, ClipboardList, CreditCard, DollarSign, RotateCcw } from 'lucide-react';
+import { Package, ShoppingCart, TrendingUp, ClipboardList, CreditCard, DollarSign, RotateCcw, NotebookPen } from 'lucide-react';
 import { reportsApi } from '../../api/reports';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../components/ui/Toast';
@@ -146,6 +146,12 @@ export default function DashboardPage() {
           </button>
           <button className="btn btn-secondary" onClick={() => navigate('/daily-report')}>
             <ClipboardList size={18} /> Daily Report
+          </button>
+          <button className="btn btn-secondary" onClick={() => navigate('/notes')}>
+            <NotebookPen size={18} /> Daily Notes
+          </button>
+          <button className="btn btn-secondary" onClick={() => navigate('/sales/void-requests')}>
+            <RotateCcw size={18} /> Void Requests
           </button>
         </div>
       </div>

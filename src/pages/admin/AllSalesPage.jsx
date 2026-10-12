@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ShoppingCart, ChevronDown, ChevronUp, RotateCcw, AlertCircle, Ban, Layers, Check } from 'lucide-react';
 import { salesApi } from '../../api/sales';
 import { voidsApi } from '../../api/voids';
@@ -11,6 +12,7 @@ export default function AllSalesPage() {
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState(null);
   const [filter, setFilter] = useState({ from: getToday(), to: getToday(), status: '' });
+  const [pendingVoidCount, setPendingVoidCount] = useState(0);
   const toast = useToast();
 
   // Admin Void Modal State
@@ -39,6 +41,12 @@ export default function AllSalesPage() {
   };
 
   useEffect(() => { loadSales(); }, [filter]);
+
+  useEffect(() => {
+    voidsApi.getVoidRequests()
+      .then(data => setPendingVoidCount(data ? data.length : 0))
+      .catch(() => {});
+  }, []);
 
   const setDatePreset = (preset) => {
     const today = getToday();
@@ -128,6 +136,54 @@ export default function AllSalesPage() {
       <div className="page-header">
         <h1 className="page-title">All Sales</h1>
         <p className="page-subtitle">View, manage, and correct all shop sales records</p>
+      </div>
+
+      {/* Sub-nav switcher between All Sales and Void Requests */}
+      <div className="subnav-tabs mb-4">
+        <Link to="/sales/all" className="subnav-tab active">
+          <ShoppingCart size={16} />
+          <span>All Sales</span>
+        </Link>
+        <Link to="/sales/void-requests" className="subnav-tab">
+          <RotateCcw size={16} />
+          <span>Void Requests</span>
+          {pendingVoidCount > 0 && (
+            <span className="badge-count badge-danger">{pendingVoidCount}</span>
+          )}
+        </Link>
+      </div>
+
+      {/* Quick Status Filter Pills */}
+      <div className="filter-pills mb-3">
+        <button
+          type="button"
+          className={`filter-pill ${filter.status === '' ? 'active' : ''}`}
+          onClick={() => setFilter(f => ({ ...f, status: '' }))}
+        >
+          All Sales
+        </button>
+        <button
+          type="button"
+          className={`filter-pill ${filter.status === 'ACTIVE' ? 'active' : ''}`}
+          onClick={() => setFilter(f => ({ ...f, status: 'ACTIVE' }))}
+        >
+          Active Sales
+        </button>
+        <button
+          type="button"
+          className={`filter-pill pill-void ${filter.status === 'VOID' ? 'active' : ''}`}
+          onClick={() => setFilter(f => ({ ...f, status: 'VOID' }))}
+        >
+          <RotateCcw size={13} />
+          Voided Sales
+        </button>
+        <button
+          type="button"
+          className={`filter-pill ${filter.status === 'CREDIT' ? 'active' : ''}`}
+          onClick={() => setFilter(f => ({ ...f, status: 'CREDIT' }))}
+        >
+          Credit Sales
+        </button>
       </div>
 
       {/* Filters */}

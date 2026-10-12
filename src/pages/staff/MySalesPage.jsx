@@ -144,6 +144,39 @@ export default function MySalesPage() {
         <p className="page-subtitle">View and manage your recorded sales</p>
       </div>
 
+      {/* Quick Status Filter Pills */}
+      <div className="filter-pills mb-3">
+        <button
+          type="button"
+          className={`filter-pill ${filter.status === '' ? 'active' : ''}`}
+          onClick={() => setFilter(f => ({ ...f, status: '' }))}
+        >
+          All Sales
+        </button>
+        <button
+          type="button"
+          className={`filter-pill ${filter.status === 'ACTIVE' ? 'active' : ''}`}
+          onClick={() => setFilter(f => ({ ...f, status: 'ACTIVE' }))}
+        >
+          Active Sales
+        </button>
+        <button
+          type="button"
+          className={`filter-pill pill-void ${filter.status === 'VOID' ? 'active' : ''}`}
+          onClick={() => setFilter(f => ({ ...f, status: 'VOID' }))}
+        >
+          <RotateCcw size={13} />
+          Voided Sales
+        </button>
+        <button
+          type="button"
+          className={`filter-pill ${filter.status === 'CREDIT' ? 'active' : ''}`}
+          onClick={() => setFilter(f => ({ ...f, status: 'CREDIT' }))}
+        >
+          Credit Sales
+        </button>
+      </div>
+
       {/* Filters */}
       <div className="filter-bar">
         <div className="flex gap-2">

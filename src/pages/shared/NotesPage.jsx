@@ -125,7 +125,7 @@ export default function NotesPage() {
 
       {/* Filter Bar */}
       <div className="filter-bar mb-4">
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {['today', 'week', 'all', 'custom'].map((p) => (
             <button
               key={p}
@@ -139,7 +139,7 @@ export default function NotesPage() {
         </div>
 
         {filterPeriod === 'custom' && (
-          <div className="flex items-center gap-2 mt-2 w-full">
+          <div className="flex items-center gap-2 mt-2 w-full flex-wrap">
             <input
               type="date"
               className="form-input"
