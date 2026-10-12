@@ -81,6 +81,7 @@ export function capitalize(str) {
 export function getStatusBadgeClass(status) {
   const map = {
     'ACTIVE': 'badge-active',
+    'VOID': 'badge-void',
     'CREDIT': 'badge-credit',
     'CREDIT_PAID': 'badge-credit-paid',
     'CORRECTED': 'badge-corrected',

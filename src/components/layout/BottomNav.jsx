@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import {
   PlusCircle, ShoppingCart, Package, LayoutDashboard, MoreHorizontal,
   ClipboardList, FileText, Receipt, Users, Landmark, BarChart3,
-  SlidersHorizontal, LogOut, Sun, Moon
+  SlidersHorizontal, LogOut, Sun, Moon, NotebookPen, RotateCcw
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -39,6 +39,7 @@ export default function BottomNav() {
 
   // More menu items (overflow items not in bottom tabs)
   const staffMoreItems = [
+    { to: '/notes', icon: NotebookPen, label: 'Daily Notes' },
     { to: '/purchases/new', icon: ClipboardList, label: 'New Purchase Request' },
     { to: '/purchases/mine', icon: ClipboardList, label: 'My Purchases' },
     { to: '/expenses/new', icon: Receipt, label: 'Record Expense' },
@@ -46,6 +47,8 @@ export default function BottomNav() {
   ];
 
   const adminMoreItems = [
+    { to: '/sales/void-requests', icon: RotateCcw, label: 'Void Requests' },
+    { to: '/notes', icon: NotebookPen, label: 'Daily Notes' },
     { to: '/purchases/review', icon: ClipboardList, label: 'Purchase Requests' },
     { to: '/purchases/new', icon: ClipboardList, label: 'New Purchase' },
     { to: '/expenses/new', icon: Receipt, label: 'Record Expense' },

@@ -24,6 +24,8 @@ import FinancialReportPage from './pages/admin/FinancialReportPage';
 import StaffManagementPage from './pages/admin/StaffManagementPage';
 import BanksPage from './pages/admin/BanksPage';
 import DailyReportsAdminPage from './pages/admin/DailyReportsAdminPage';
+import VoidRequestsPage from './pages/admin/VoidRequestsPage';
+import NotesPage from './pages/shared/NotesPage';
 import UserManagementPage from './pages/super-admin/UserManagementPage';
 
 import './styles/globals.css';
@@ -53,6 +55,7 @@ function AppRoutes() {
           <Route path="/expenses/new" element={<NewExpensePage />} />
           <Route path="/expenses" element={<ExpensesPage />} />
           <Route path="/daily-report" element={<DailyReportPage />} />
+          <Route path="/notes" element={<NotesPage />} />
         </Route>
       </Route>
 
@@ -61,6 +64,7 @@ function AppRoutes() {
         <Route element={<AppShell />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/sales/all" element={<AllSalesPage />} />
+          <Route path="/sales/void-requests" element={<VoidRequestsPage />} />
           <Route path="/purchases/review" element={<PurchaseReviewPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/adjustments" element={<AdjustmentsPage />} />

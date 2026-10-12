@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import {
   Sun, LayoutDashboard, ShoppingCart, Package, ClipboardList,
   FileText, Users, DollarSign, Landmark, BarChart3, SlidersHorizontal,
-  LogOut, PlusCircle, Receipt
+  LogOut, PlusCircle, Receipt, RotateCcw, NotebookPen
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -45,9 +45,14 @@ export default function Sidebar() {
             <PlusCircle size={18} /> New Sale
           </NavLink>
           {isAdmin ? (
-            <NavLink to="/sales/all" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-              <ShoppingCart size={18} /> All Sales
-            </NavLink>
+            <>
+              <NavLink to="/sales/all" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+                <ShoppingCart size={18} /> All Sales
+              </NavLink>
+              <NavLink to="/sales/void-requests" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+                <RotateCcw size={18} /> Void Requests
+              </NavLink>
+            </>
           ) : (
             <NavLink to="/sales/mine" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
               <ShoppingCart size={18} /> My Sales
@@ -108,6 +113,14 @@ export default function Sidebar() {
               </NavLink>
             </>
           )}
+        </div>
+
+        {/* Notes & Logs (All Roles) */}
+        <div className="sidebar-section">
+          <div className="sidebar-section-title">Communication</div>
+          <NavLink to="/notes" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+            <NotebookPen size={18} /> Daily Notes
+          </NavLink>
         </div>
 
         {/* Management */}

@@ -168,9 +168,21 @@
 
 .badge-rejected,
 .badge-corrected,
-.badge-revoked {
+.badge-revoked,
+.badge-void {
   background: var(--color-danger-light);
   color: var(--color-danger);
+}
+
+.badge-void {
+  border: 1px dashed var(--color-danger);
+  font-weight: 700;
+}
+
+.item-voided {
+  opacity: 0.65;
+  text-decoration: line-through;
+  color: var(--color-text-muted);
 }
 
 .badge-count {
@@ -623,4 +635,145 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
+}
+
+/* ── Option Cards (Segmented / Selector Choices) ── */
+.option-card-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.option-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: left;
+  user-select: none;
+}
+
+.option-card:hover {
+  border-color: var(--color-text-muted);
+  background: var(--color-surface-alt);
+}
+
+.option-card.active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+[data-theme="dark"] .option-card.active {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: var(--color-accent);
+}
+
+.option-card.active-danger {
+  border-color: var(--color-danger);
+  background: var(--color-danger-light);
+  box-shadow: 0 0 0 1px var(--color-danger);
+}
+
+[data-theme="dark"] .option-card.active-danger {
+  background: rgba(239, 68, 68, 0.14);
+  border-color: var(--color-danger);
+}
+
+.option-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.option-card-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semi);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.option-card-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.35;
+}
+
+/* ── Item Selection Cards ── */
+.item-select-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 220px;
+  overflow-y: auto;
+  padding: var(--space-1);
+}
+
+.item-select-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+}
+
+.item-select-card:hover {
+  border-color: var(--color-text-muted);
+  background: var(--color-surface-alt);
+}
+
+.item-select-card.selected {
+  border-color: var(--color-danger);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.item-select-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-surface-alt);
+}
+
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  background: var(--color-surface);
+  flex-shrink: 0;
+}
+
+.custom-checkbox.checked {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #FFFFFF;
+}
+
+.info-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
 }

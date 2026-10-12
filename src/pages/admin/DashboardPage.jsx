@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package, ShoppingCart, TrendingUp, ClipboardList, CreditCard, DollarSign } from 'lucide-react';
+import { Package, ShoppingCart, TrendingUp, ClipboardList, CreditCard, DollarSign, RotateCcw } from 'lucide-react';
 import { reportsApi } from '../../api/reports';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../components/ui/Toast';
@@ -71,6 +71,15 @@ export default function DashboardPage() {
       icon: CreditCard,
       color: 'var(--color-info)',
       count: stats.pendingCreditPayments
+    });
+  }
+  if (stats?.pendingVoidRequests > 0) {
+    alerts.push({
+      label: `${stats.pendingVoidRequests} pending void request${stats.pendingVoidRequests > 1 ? 's' : ''}`,
+      action: () => navigate('/sales/void-requests'),
+      icon: RotateCcw,
+      color: 'var(--color-danger)',
+      count: stats.pendingVoidRequests
     });
   }
 
