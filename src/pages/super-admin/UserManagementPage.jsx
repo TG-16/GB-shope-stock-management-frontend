@@ -187,6 +187,7 @@ export default function UserManagementPage() {
               <select className="form-select" value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))}>
                 <option value="STAFF">Staff</option>
                 <option value="ADMIN">Admin</option>
+                <option value="SUPER_ADMIN">Super Admin</option>
               </select>
             </div>
             <div className="modal-actions">
