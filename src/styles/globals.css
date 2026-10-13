@@ -7,6 +7,7 @@
 
 /* ── Light Mode Tokens ── */
 :root {
+  color-scheme: light;
   /* Background layers */
   --color-bg:            #F5F7FA;
   --color-surface:       #FFFFFF;
@@ -91,6 +92,7 @@
 
 /* ── Dark Mode Tokens ── */
 [data-theme="dark"] {
+  color-scheme: dark;
   --color-bg:            #0B1120;
   --color-surface:       #141C2E;
   --color-surface-alt:   #1C2640;
